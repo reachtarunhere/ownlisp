@@ -1,13 +1,16 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-static char text_buffer[2048];
+#include <editline/readline.h>
+#include <editline/history.h>
 
 int main(int argc, char** argv) {
 
   while (1) {
-    fputs("lispy> ", stdout);
-    fgets(text_buffer, 2048, stdin);
-    printf("You said %s", text_buffer);
+    char* input = readline("lispy> ");
+    add_history(input);
+    printf("You said %s\n", input);
+    free(input);
   }
 
   return 0;
